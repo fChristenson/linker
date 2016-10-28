@@ -1,0 +1,16 @@
+{
+  "name": "linker",
+  "version": "1.0.0",
+  "description": "",
+  "main": "bin/linker.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "casperjs bin/linker.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "casperjs": "^1.1.3",
+    "phantomjs-prebuilt": "^2.1.13"
+  }
+}
