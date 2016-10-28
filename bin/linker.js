@@ -114,7 +114,7 @@ casper.then(function() {
 
 casper.then(function() {
   this.echo('----------------');
-  this.echo('');
+  this.echo(new Date());
 });
 
 casper.run();
