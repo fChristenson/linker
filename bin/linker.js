@@ -77,7 +77,7 @@ casper.then(function() {
   this.echo('');
 });
 
-casper.thenOpen('https://www.linkedin.com/people/pymk', function() {
+casper.thenOpen('https://www.linkedin.com/people/pymk/hub?ref=global-nav&trk=nav_utilities_add_connx', function() {
   this.echo('--- Contacts ---');
   this.echo(this.getTitle());
 });
@@ -87,16 +87,8 @@ casper.then(function() {
 });
 
 casper.then(function() {
-  for(var i = 0; i < SCROLL_TIMES; i++) {
-    this.wait(WAIT_TIME, function() {
-      this.scrollToBottom();
-    });
-  }
-});
-
-casper.then(function() {
   connectButtons = this.evaluate(function() {
-    var buttons = __utils__.findAll('.bt-invite-accept to linker');
+    var buttons = __utils__.findAll('.bt-invite-accept');
     return buttons
     .map(function(btn) {
       btn.click();
@@ -107,6 +99,14 @@ casper.then(function() {
 
 casper.then(function() {
   this.echo('Clicked ' + connectButtons.length + ' connects!');
+});
+
+casper.then(function() {
+  for(var i = 0; i < SCROLL_TIMES; i++) {
+    this.wait(WAIT_TIME, function() {
+      this.scrollToBottom();
+    });
+  }
 });
 
 casper.then(function() {
