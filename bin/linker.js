@@ -9,6 +9,7 @@ var SCROLL_TIMES = 50;
 var WAIT_TIME = 500;
 var likeButtons = [];
 var contactButtons = [];
+var connectButtons = [];
 
 casper.start('https://www.linkedin.com/', function() {
   this.echo('--- Login ---');
@@ -94,6 +95,21 @@ casper.then(function() {
 });
 
 casper.then(function() {
+  connectButtons = this.evaluate(function() {
+    var buttons = __utils__.findAll('.bt-invite-accept to linker');
+    return buttons
+    .map(function(btn) {
+      btn.click();
+      return btn.innerHTML;
+    })
+  })
+});
+
+casper.then(function() {
+  this.echo('Clicked ' + connectButtons.length + ' connects!');
+});
+
+casper.then(function() {
   contactButtons = this.evaluate(function() {
     var buttons = __utils__.findAll('.bt-request-buffed');
     return buttons
@@ -122,8 +138,8 @@ casper.run();
 function enterCredentials() {
   var emailField      = document.querySelector("#login-email");
   var passwordField   = document.querySelector("#login-password");
-  emailField.value    = '<email>';
-  passwordField.value = '<password>';
+  emailField.value    = 'fredrik.christenson@gmail.com';
+  passwordField.value = 'fidde19870102';
 }
 
 function submitForm() {
