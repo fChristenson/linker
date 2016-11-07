@@ -5,7 +5,8 @@ var casper = require('casper').create({
     }
 });
 
-var SCROLL_TIMES = 50;
+var CONTACTS_SCROLL_TIMES = 50;
+var LIKES_SCROLL_TIMES = 5;
 var WAIT_TIME = 500;
 var likeButtons = [];
 var contactButtons = [];
@@ -43,7 +44,7 @@ casper.then(function() {
 });
 
 casper.then(function() {
-  for(var i = 0; i < SCROLL_TIMES; i++) {
+  for(var i = 0; i < LIKES_SCROLL_TIMES; i++) {
     this.wait(WAIT_TIME, function() {
       this.scrollToBottom();
     });
@@ -58,9 +59,14 @@ casper.then(function() {
       return button.getAttribute('data-liked') !== 'true'
     })
     .map(function(btn) {
-      btn.click();
-      return btn.innerHTML;
+      if (Math.floor(Math.random() * 100) <= 20) {
+        btn.click();
+        return btn.innerHTML;
+      }
     })
+    .filter(function(val) {
+      return !!val;
+    });
   })
 });
 
@@ -102,7 +108,7 @@ casper.then(function() {
 });
 
 casper.then(function() {
-  for(var i = 0; i < SCROLL_TIMES; i++) {
+  for(var i = 0; i < CONTACTS_SCROLL_TIMES; i++) {
     this.wait(WAIT_TIME, function() {
       this.scrollToBottom();
     });
@@ -138,8 +144,8 @@ casper.run();
 function enterCredentials() {
   var emailField      = document.querySelector("#login-email");
   var passwordField   = document.querySelector("#login-password");
-  emailField.value    = 'fredrik.christenson@gmail.com';
-  passwordField.value = 'fidde19870102';
+  emailField.value    = '<email>';
+  passwordField.value = '<password>';
 }
 
 function submitForm() {
