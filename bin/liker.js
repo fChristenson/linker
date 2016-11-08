@@ -14,7 +14,7 @@ casper.then(function() {
 });
 
 casper.then(function() {
-  LIKE_BUTTONS = this.evaluate(client.clickLikeButtons)
+  LIKE_BUTTONS = this.evaluate(client.clickLikeButtons, CHANCE_TO_LIKE)
 });
 
 casper.then(function() {
