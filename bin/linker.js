@@ -1,88 +1,4 @@
-var casper = require('casper').create({
-    pageSettings: {
-        loadImages:  false,
-        loadPlugins: false
-    }
-});
-
-var CONTACTS_SCROLL_TIMES = 50;
-var LIKES_SCROLL_TIMES = 5;
-var WAIT_TIME = 500;
-var likeButtons = [];
-var contactButtons = [];
-var connectButtons = [];
-
-casper.start('https://www.linkedin.com/', function() {
-  this.echo('--- Login ---');
-  this.echo(this.getTitle());
-});
-
-casper.then(function() {
-  this.waitForSelector('#login-email');
-});
-
-casper.then(function() {
-  this.evaluate(enterCredentials);
-});
-
-casper.then(function() {
-  this.evaluate(submitForm);
-});
-
-casper.then(function() {
-  this.waitForSelector('.feed');
-});
-
-casper.then(function() {
-  this.echo('-------------');
-  this.echo('');
-});
-
-casper.then(function() {
-  this.echo('--- Likes ---');
-  this.echo(this.getTitle());
-});
-
-casper.then(function() {
-  for(var i = 0; i < LIKES_SCROLL_TIMES; i++) {
-    this.wait(WAIT_TIME, function() {
-      this.scrollToBottom();
-    });
-  }
-});
-
-casper.then(function() {
-  likeButtons = this.evaluate(function() {
-    var buttons = __utils__.findAll('button.like');
-    return buttons
-    .filter(function(button) {
-      return button.getAttribute('data-liked') !== 'true'
-    })
-    .map(function(btn) {
-      if (Math.floor(Math.random() * 100) <= 20) {
-        btn.click();
-        return btn.innerHTML;
-      }
-    })
-    .filter(function(val) {
-      return !!val;
-    });
-  })
-});
-
-casper.then(function() {
-  this.echo('Clicked ' + likeButtons.length + ' likes!');
-});
-
-casper.then(function() {
-  this.wait(5000);
-});
-
-casper.then(function() {
-  this.echo('-------------');
-  this.echo('');
-});
-
+var client = require('../lib/client')
 casper.thenOpen('https://www.linkedin.com/people/pymk/hub?ref=global-nav&trk=nav_utilities_add_connx', function() {
   this.echo('--- Contacts ---');
   this.echo(this.getTitle());
@@ -93,14 +9,7 @@ casper.then(function() {
 });
 
 casper.then(function() {
-  connectButtons = this.evaluate(function() {
-    var buttons = __utils__.findAll('.bt-invite-accept');
-    return buttons
-    .map(function(btn) {
-      btn.click();
-      return btn.innerHTML;
-    })
-  })
+  connectButtons = this.evaluate(client.clickConnectButtons)
 });
 
 casper.then(function() {
@@ -116,14 +25,7 @@ casper.then(function() {
 });
 
 casper.then(function() {
-  contactButtons = this.evaluate(function() {
-    var buttons = __utils__.findAll('.bt-request-buffed');
-    return buttons
-    .map(function(btn) {
-      btn.click();
-      return btn.innerHTML;
-    })
-  })
+  contactButtons = this.evaluate(client.clickContactButtons)
 });
 
 casper.then(function() {
@@ -131,24 +33,10 @@ casper.then(function() {
 });
 
 casper.then(function() {
-  this.wait(5000);
+  this.wait(TIME_TO_WAIT_FOR_REQUESTS_TO_FINISH);
 });
 
 casper.then(function() {
   this.echo('----------------');
   this.echo(new Date());
 });
-
-casper.run();
-
-function enterCredentials() {
-  var emailField      = document.querySelector("#login-email");
-  var passwordField   = document.querySelector("#login-password");
-  emailField.value    = '<email>';
-  passwordField.value = '<password>';
-}
-
-function submitForm() {
-  var form = document.querySelector(".login-form");
-  form.submit();
-}
