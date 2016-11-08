@@ -1,3 +1,5 @@
+var system = require('system');
+var env    = system.env;
 var casper = require('casper').create({
     pageSettings: {
         loadImages:  false,
@@ -6,17 +8,19 @@ var casper = require('casper').create({
 });
 
 // globals
-var TIME_TO_WAIT_FOR_REQUESTS_TO_FINISH = 5000;
-var LIKES_SCROLL_TIMES                  = 0;
-var WAIT_TIME                           = 500;
-var likeButtons                         = [];
-var CONTACTS_SCROLL_TIMES               = 50;
-var contactButtons                      = [];
-var connectButtons                      = [];
+var EMAIL                     = env.LINKEDIN_USERNAME;
+var PASSWORD                  = env.LINKEDIN_PASSWORD;
+var TIME_TO_WAIT_FOR_REQUESTS = env.LINKEDIND_TIME_TO_WAIT_FOR_REQUESTS || 5000;
+var LIKES_SCROLL_TIMES        = env.LINKEDIND_LIKES_SCROLL_BUFFER       || 0;
+var SCROLL_WAIT_TIME          = env.LINKEDIND_TIME_TO_WAIT_PER_SCROLL   || 500;
+var CONTACTS_SCROLL_TIMES     = env.LINKEDIND_CONTACTS_SCROLL_TIMES     || 50;
+var LIKE_BUTTONS              = [];
+var CONTACT_BUTTONS           = [];
+var CONNECT_BUTTONS           = [];
 
 // modules
 require('./login');
 require('./liker');
-require('./linker')
+require('./linker');
 
 casper.run();

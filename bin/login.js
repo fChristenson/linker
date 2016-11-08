@@ -10,7 +10,7 @@ casper.then(function() {
 });
 
 casper.then(function() {
-  this.evaluate(client.enterCredentials);
+  this.evaluate(client.enterCredentials, EMAIL, PASSWORD);
 });
 
 casper.then(function() {
