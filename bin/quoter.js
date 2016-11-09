@@ -61,4 +61,8 @@ casper.then(function() {
   this.wait(constants.TIME_TO_WAIT_FOR_REQUESTS);
 });
 
+casper.then(function() {
+  this.echo(new Date());
+});
+
 casper.run();
