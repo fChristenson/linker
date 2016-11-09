@@ -1,25 +1,11 @@
-var client = require('../lib/client');
+var constants = require('../lib/constants')
 
-casper.start('https://www.linkedin.com/', function() {
+casper.start(constants.LINKEDIN_URL, function() {
   this.echo('--- Login ---');
   this.echo(this.getTitle());
 });
 
-casper.then(function() {
-  this.waitForSelector('#login-email');
-});
-
-casper.then(function() {
-  this.evaluate(client.enterCredentials, EMAIL, PASSWORD);
-});
-
-casper.then(function() {
-  this.evaluate(client.submitForm);
-});
-
-casper.then(function() {
-  this.waitForSelector('.feed');
-});
+require('../lib/form_login');
 
 casper.then(function() {
   this.echo('-------------');

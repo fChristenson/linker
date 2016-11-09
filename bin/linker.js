@@ -1,4 +1,11 @@
-var client = require('../lib/client')
+var system                = require('system');
+var client                = require('../lib/client')
+var constants             = require('../lib/constants')
+
+var env                   = system.env;
+var CONTACTS_SCROLL_TIMES = env.LINKEDIN_CONTACTS_SCROLL_TIMES || 50;
+var CONTACT_BUTTONS       = [];
+var CONNECT_BUTTONS       = [];
 
 casper.thenOpen('https://www.linkedin.com/people/pymk/hub?ref=global-nav&trk=nav_utilities_add_connx', function() {
   this.echo('--- Contacts ---');
@@ -19,7 +26,7 @@ casper.then(function() {
 
 casper.then(function() {
   for(var i = 0; i < CONTACTS_SCROLL_TIMES; i++) {
-    this.wait(SCROLL_WAIT_TIME, function() {
+    this.wait(constants.SCROLL_WAIT_TIME, function() {
       this.scrollToBottom();
     });
   }
@@ -34,7 +41,7 @@ casper.then(function() {
 });
 
 casper.then(function() {
-  this.wait(TIME_TO_WAIT_FOR_REQUESTS);
+  this.wait(constants.TIME_TO_WAIT_FOR_REQUESTS);
 });
 
 casper.then(function() {
