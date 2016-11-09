@@ -52,6 +52,9 @@ casper.then(function() {
   if (QUOTE_TEXT && QUOTE_TEXT.length > 0) {
     this.evaluate(client.postUpdate, QUOTE_TEXT);
   }
+  else {
+    this.echo('QUOTE_TEXT was empty!');
+  }
 });
 
 casper.then(function() {
