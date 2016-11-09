@@ -49,7 +49,9 @@ casper.then(function() {
 });
 
 casper.then(function() {
-  this.evaluate(client.postUpdate, QUOTE_TEXT);
+  if (QUOTE_TEXT && QUOTE_TEXT.length > 0) {
+    this.evaluate(client.postUpdate, QUOTE_TEXT);
+  }
 });
 
 casper.then(function() {
