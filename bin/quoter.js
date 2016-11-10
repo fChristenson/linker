@@ -53,7 +53,7 @@ casper.then(function() {
     this.evaluate(client.postUpdate, QUOTE_TEXT);
   }
   else {
-    this.echo('QUOTE_TEXT was empty!');
+    this.echo('QUOTE_TEXT was empty, skipping quote!');
   }
 });
 
