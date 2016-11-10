@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "casperjs bin/linker/index.js",
-    "quote": "casperjs bin/quoter.js"
+    "quote": "casperjs bin/quoter.js",
+    "image-quote": "casperjs bin/pic_quoter.js"
   },
   "author": "",
   "license": "ISC",
