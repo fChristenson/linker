@@ -1,73 +1,62 @@
-var U         = require('../lib/utils');
-var client    = require('../lib/client');
+var Log       = require('../lib/utils/logging_utils');
+var Quote     = require('../lib/utils/quote_utils');
+var Wait      = require('../lib/utils/wait_utils');
 var constants = require('../lib/constants');
+var client    = require('../lib/client');
 
 var casper = require('casper').create({
-    pageSettings: {
-        loadImages:  false,
-        loadPlugins: false
-    }
+  pageSettings: {
+    loadImages:  false,
+    loadPlugins: false
+  }
 });
 
 var CATEGORIES = ['inspire', 'funny'];
 var QUOTE_TEXT = '';
 
-casper.start(U.categoriesToDailyQuoteUrl(CATEGORIES));
+casper.start(Quote.categoriesToDailyQuoteUrl(CATEGORIES));
 
-casper.then(function() {
-  this.echo('--- Quote ---');
-});
+casper.then(Log.logStartTime);
+
+casper.then(Log.makeEcho('--- Quote ---'));
 
 casper.then(function() {
   var json   = JSON.parse(this.getPageContent());
-  var quote  = U.quotesJsonToQuote(json);
-  QUOTE_TEXT = U.quoteToQuoteString(quote);
-
-  this.echo(U.quoteToQuoteString(quote));
+  var quote  = Quote.quotesJsonToQuote(json);
+  QUOTE_TEXT = Quote.quoteToQuoteString(quote);
+  this.echo(Quote.quoteToQuoteString(quote));
 });
 
-casper.then(function() {
-  this.echo('-------------');
-  this.echo('');
-});
+casper.then(Log.logEndLine);
 
-casper.thenOpen(constants.LINKEDIN_URL, function() {
-  this.echo('--- Login ---');
-  this.echo(this.getTitle());
-});
+casper.thenOpen(constants.LINKEDIN_URL);
+
+casper.then(Log.makeEcho('--- Login ---'));
+
+casper.then(Log.logPageTitle);
 
 require('../lib/form_login');
 
-casper.then(function() {
-  this.echo('-------------');
-  this.echo('');
-});
+casper.then(Log.logEndLine);
 
-casper.then(function() {
-  this.echo('--- Post quote ---');
-  this.echo(QUOTE_TEXT);
-});
+casper.then(Log.makeEcho('--- Post quote ---'));
+
+casper.then(Log.logPageTitle);
 
 casper.then(function() {
   if (QUOTE_TEXT && QUOTE_TEXT.length > 0) {
     this.evaluate(client.postUpdate, QUOTE_TEXT);
+    this.echo('Quote posted!');
   }
   else {
     this.echo('QUOTE_TEXT was empty, skipping quote!');
   }
 });
 
-casper.then(function() {
-  this.echo('-------------');
-  this.echo('');
-});
+casper.then(Log.logEndLine);
 
-casper.then(function() {
-  this.wait(constants.TIME_TO_WAIT_FOR_REQUESTS);
-});
+casper.then(Wait.wait);
 
-casper.then(function() {
-  this.echo(new Date());
-});
+casper.then(Log.logEndTime);
 
 casper.run();

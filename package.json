@@ -5,7 +5,7 @@
   "main": "bin/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "casperjs bin/index.js",
+    "start": "casperjs bin/linker/index.js",
     "quote": "casperjs bin/quoter.js"
   },
   "author": "",
