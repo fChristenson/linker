@@ -2,7 +2,7 @@
   "name": "linker",
   "version": "1.0.0",
   "description": "",
-  "main": "bin/index.js",
+  "main": "bin/linker/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "casperjs bin/linker/index.js",

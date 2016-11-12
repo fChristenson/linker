@@ -1,3 +1,4 @@
+var system    = require('system');
 var Log       = require('../lib/utils/logging_utils');
 var Quote     = require('../lib/utils/quote_utils');
 var Wait      = require('../lib/utils/wait_utils');
@@ -11,10 +12,11 @@ var casper = require('casper').create({
   }
 });
 
-var CATEGORIES = ['inspire', 'funny'];
+var env        = system.env;
+var CATEGORY   = env.QUOTE_CATEGORY || 'funny';
 var QUOTE_TEXT = '';
 
-casper.start(Quote.categoriesToDailyQuoteUrl(CATEGORIES));
+casper.start(Quote.categoryToDailyQuoteUrl(CATEGORY));
 
 casper.then(Log.logStartTime);
 
