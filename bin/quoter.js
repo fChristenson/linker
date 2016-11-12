@@ -13,7 +13,7 @@ var casper = require('casper').create({
 });
 
 var env        = system.env;
-var CATEGORY   = env.QUOTE_CATEGORY || 'funny';
+var CATEGORY   = env.LINKEDIN_QUOTE_CATEGORY || 'funny';
 var QUOTE_TEXT = '';
 
 casper.start(Quote.categoryToDailyQuoteUrl(CATEGORY));
