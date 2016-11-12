@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "casperjs bin/linker/index.js",
     "image": "casperjs bin/image_poster.js",
-    "funny-quote": "casperjs bin/quoter.js",
+    "quote": "casperjs bin/quoter.js",
     "inspire-quote": "LINKEDIN_QUOTE_CATEGORY=inspire npm run quote",
     "management-quote": "LINKEDIN_QUOTE_CATEGORY=management npm run quote",
     "love-quote": "LINKEDIN_QUOTE_CATEGORY=love npm run quote",
