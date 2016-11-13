@@ -11,7 +11,8 @@
     "inspire-quote": "LINKEDIN_QUOTE_CATEGORY=inspire npm run quote",
     "management-quote": "LINKEDIN_QUOTE_CATEGORY=management npm run quote",
     "love-quote": "LINKEDIN_QUOTE_CATEGORY=love npm run quote",
-    "life-quote": "LINKEDIN_QUOTE_CATEGORY=life npm run quote"
+    "life-quote": "LINKEDIN_QUOTE_CATEGORY=life npm run quote",
+    "dilbert": "casperjs bin/dilbert.js"
   },
   "author": "",
   "license": "ISC",
