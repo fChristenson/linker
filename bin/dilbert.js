@@ -6,8 +6,8 @@ var Str       = require('../lib/utils/string_utils');
 
 var casper = require('casper').create({
   pageSettings: {
-    loadImages:  false,
-    loadPlugins: false
+    loadImages:  true,
+    loadPlugins: true
   }
 });
 
@@ -30,8 +30,18 @@ casper.then(Log.makeEcho('--- Post Dilbert comic ---'));
 casper.then(Log.logPageTitle);
 
 casper.then(function() {
+  this.evaluate(client.click, 'button.share');
+});
+
+casper.then(function() {
   this.echo('Posting link: ' + DILBERT_URL);
   this.evaluate(client.postUpdate, DILBERT_URL);
+});
+
+casper.then(Wait.wait);
+
+casper.then(function() {
+  this.evaluate(client.click, 'button.postmodule-submit');
   this.echo('Dilbert comic posted!');
 });
 
