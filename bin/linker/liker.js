@@ -6,7 +6,7 @@ var Scroll             = require('../../lib/utils/scroll_utils');
 var Wait               = require('../../lib/utils/wait_utils');
 
 var env                = system.env;
-var LIKES_SCROLL_TIMES = env.LINKEDIN_LIKES_SCROLL_BUFFER || 0;
+var LIKES_SCROLL_TIMES = env.LINKEDIN_LIKES_SCROLL_BUFFER || 50;
 var CHANCE_TO_LIKE     = env.LINKEDIN_CHANCE_TO_LIKE      || 5;
 var LIKE_BUTTONS       = [];
 
