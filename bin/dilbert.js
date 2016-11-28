@@ -35,7 +35,7 @@ casper.then(function() {
 
 casper.then(function() {
   this.echo('Posting link: ' + DILBERT_URL);
-  this.evaluate(client.postUpdate, DILBERT_URL);
+  this.evaluate(client.typeUpdate, DILBERT_URL);
 });
 
 casper.then(Wait.wait);

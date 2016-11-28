@@ -67,7 +67,7 @@ casper.then(function() {
 casper.then(function() {
   if(COMIC_URL) {
     this.echo('Posting link: ' + COMIC_URL);
-    this.evaluate(client.postUpdate, COMIC_URL);
+    this.evaluate(client.typeUpdate, COMIC_URL);
   }
   else {
     this.echo('COMIC_URL not found, skipping post!');
