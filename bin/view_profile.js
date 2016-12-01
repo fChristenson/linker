@@ -41,4 +41,6 @@ casper.then(Log.logPageTitle);
 
 casper.then(Log.logEndLine);
 
+casper.then(Log.logEndTime);
+
 casper.run();
