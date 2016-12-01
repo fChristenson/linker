@@ -6,7 +6,7 @@ var casper = require('casper').create({
 });
 
 // modules
-require('./login');
+require('../../lib/login');
 require('./liker');
 require('./linker');
 

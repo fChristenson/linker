@@ -12,7 +12,8 @@
     "love-quote": "LINKEDIN_QUOTE_CATEGORY=love npm run quote",
     "life-quote": "LINKEDIN_QUOTE_CATEGORY=life npm run quote",
     "dilbert": "casperjs bin/dilbert.js",
-    "commit-strip": "casperjs bin/commit_strip.js"
+    "commit-strip": "casperjs bin/commit_strip.js",
+    "viewer": "casperjs bin/view_profile.js"
   },
   "author": "",
   "license": "ISC",
