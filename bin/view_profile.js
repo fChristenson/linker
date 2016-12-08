@@ -5,16 +5,23 @@ var casper = require('casper').create({
   }
 });
 
+var system = require('system');
 var client = require('../lib/client');
-var Log    = require('../lib/utils/logging_utils');
+var Log = require('../lib/utils/logging_utils');
+var constants = require('../lib/constants');
+var Scroll = require('../lib/utils/scroll_utils');
 
 require('../lib/login');
 
+var env = system.env;
 var RANDOM_PROFILE_CLICKED = false;
+var VIEW_SCROLL_TIMES = env.LINKEDIN_VIEWER_SCROLL_BUFFER || 50;
 
 casper.then(Log.makeEcho('--- Open profile ---'));
 
 casper.then(Log.logPageTitle);
+
+casper.then(Scroll.makeScrollToBottom(VIEW_SCROLL_TIMES, constants.SCROLL_WAIT_TIME));
 
 casper.then(function() {
   RANDOM_PROFILE_CLICKED = this.evaluate(client.clickRandomProfileLink);
