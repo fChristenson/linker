@@ -24,12 +24,12 @@ casper.then(Log.logPageTitle);
  
 casper.then(function() {
   var links = this.evaluate(client.findAllCommitStripLinks);
-  var today = Str.getTodaysISODateString();
+  var yesterday = Str.getYesterdaysISODateString();
 
   for (var i = 0; i < links.length; i++) {
     var dateStr = Str.commitStripUrlToDate(links[i]);
 
-    if(dateStr && dateStr === today) {
+    if(dateStr && dateStr === yesterday) {
       COMIC_URL = links[i];
     }
 
