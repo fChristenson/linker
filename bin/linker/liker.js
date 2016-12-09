@@ -9,6 +9,7 @@ var env                = system.env;
 var LIKES_SCROLL_TIMES = env.LINKEDIN_LIKES_SCROLL_BUFFER || 50;
 var CHANCE_TO_LIKE     = env.LINKEDIN_CHANCE_TO_LIKE      || 5;
 var LIKE_BUTTONS       = [];
+var FOLLOW_BUTTONS     = [];
 
 casper.then(Log.makeEcho('--- Likes ---'));
 
@@ -21,7 +22,12 @@ casper.then(function() {
 });
 
 casper.then(function() {
+  FOLLOW_BUTTONS = this.evaluate(client.clickFollowButtons);
+});
+
+casper.then(function() {
   this.echo('Clicked ' + LIKE_BUTTONS.length + ' likes!');
+  this.echo('Clicked ' + FOLLOW_BUTTONS.length + ' follows!');
 });
 
 casper.then(Wait.wait);
